@@ -15,12 +15,10 @@ const InputBox = () => {
     e.preventDefault();
 
     const payload = {
-      id: new Date().getTime().toString(),
-      todo,
-      isCompleted: false,
+      title: todo,
+      completed: false,
     };
 
-    dispatch(addTodo(payload));
     setTodo("");
   };
 

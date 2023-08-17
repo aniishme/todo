@@ -1,5 +1,7 @@
 export type TTodo = {
-  todo: string;
-  isCompleted: boolean;
-  id: string;
+  id: number;
+  title: string;
+  completed: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
 };

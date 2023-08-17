@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
 
 import { prisma } from "@/lib/prisma";
+import { TTodo } from "@/types";
 
 export async function GET() {
   try {
-    const todos = await prisma.todo.findMany();
+    const todos: TTodo[] = await prisma.todo.findMany();
     return NextResponse.json({
       success: true,
       data: todos,
@@ -30,7 +31,7 @@ export async function POST(request: Request) {
       completed: false,
     };
 
-    const newTodo = await prisma.todo.create({
+    const newTodo: TTodo = await prisma.todo.create({
       data: todo,
     });
 
@@ -55,7 +56,7 @@ export async function DELETE(request: Request) {
   try {
     const { id } = await request.json();
 
-    const todo = await prisma.todo.delete({
+    const todo: TTodo = await prisma.todo.delete({
       where: {
         id,
       },
@@ -82,7 +83,7 @@ export async function PUT(request: Request) {
   try {
     const { id, completed, title } = await request.json();
 
-    const todo = await prisma.todo.update({
+    const todo: TTodo = await prisma.todo.update({
       where: {
         id,
       },
