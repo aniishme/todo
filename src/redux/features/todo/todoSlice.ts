@@ -17,10 +17,19 @@ export const todoSlice = createSlice({
     addTodo(state, action: PayloadAction<TTodo>) {
       state.todos.push(action.payload);
     },
+    changeComplete(state, action: PayloadAction<TTodo>) {
+      const filterTodo = state.todos.filter((item) => {
+        if (item.id !== action.payload.id) {
+          return true;
+        }
+      });
+      filterTodo.push(action.payload);
+      state.todos = filterTodo;
+    },
   },
   extraReducers: () => {},
 });
 
-export const { addTodo } = todoSlice.actions;
+export const { addTodo, changeComplete } = todoSlice.actions;
 
 export default todoSlice.reducer;
