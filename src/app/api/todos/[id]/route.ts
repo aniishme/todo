@@ -1,14 +1,21 @@
 import { NextResponse } from "next/server";
+import { NextApiRequest } from "next";
 
 import { prisma } from "@/lib/prisma";
 import { TTodo } from "@/types";
 
-export async function GET() {
+export async function DELETE(request: NextApiRequest, context: any) {
   try {
-    const todos: TTodo[] = await prisma.todo.findMany();
+    const id = parseInt(context.params.id);
+    const todo: TTodo = await prisma.todo.delete({
+      where: {
+        id: id,
+      },
+    });
+
     return NextResponse.json({
       success: true,
-      data: todos,
+      data: todo,
     });
   } catch (error: any) {
     return NextResponse.json(
@@ -23,21 +30,24 @@ export async function GET() {
   }
 }
 
-export async function POST(request: Request) {
+export async function PUT(request: Request, context: any) {
   try {
-    const { title } = await request.json();
-    const todo = {
-      title,
-      completed: false,
-    };
+    const id = parseInt(context.params.id);
+    const { completed, title } = await request.json();
 
-    const newTodo: TTodo = await prisma.todo.create({
-      data: todo,
+    const todo: TTodo = await prisma.todo.update({
+      where: {
+        id,
+      },
+      data: {
+        completed,
+        title,
+      },
     });
 
     return NextResponse.json({
       success: true,
-      data: newTodo,
+      data: todo,
     });
   } catch (error: any) {
     return NextResponse.json(
