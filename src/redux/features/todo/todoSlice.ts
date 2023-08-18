@@ -35,7 +35,7 @@ export const todoSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(addTodo.fulfilled, (state, action) => {
-      state.todos.push(action.payload.data);
+      state.todos.unshift(action.payload.data);
       state.loading = false;
     });
     builder.addCase(addTodo.rejected, (state) => {
@@ -65,7 +65,7 @@ export const todoSlice = createSlice({
       const filteredTodos = state.todos.filter((item) => {
         return item.id !== action.payload.data.id;
       });
-      filteredTodos.push(action.payload.data);
+      filteredTodos.unshift(action.payload.data);
       state.todos = filteredTodos;
       state.loading = false;
     });

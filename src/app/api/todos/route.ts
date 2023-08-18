@@ -5,7 +5,13 @@ import { TTodo } from "@/types";
 
 export async function GET() {
   try {
-    const todos: TTodo[] = await prisma.todo.findMany();
+    const todos: TTodo[] = await prisma.todo.findMany({
+      orderBy: [
+        {
+          updatedAt: "desc",
+        },
+      ],
+    });
     return NextResponse.json({
       success: true,
       data: todos,
