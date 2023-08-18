@@ -1,4 +1,4 @@
-import { getTodos, addTodo, deleteTodo } from "./todoApi";
+import { getTodos, addTodo, deleteTodo, updateTodo } from "./todoApi";
 import { TTodo } from "@/types";
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -54,6 +54,22 @@ export const todoSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(deleteTodo.rejected, (state) => {
+      state.loading = true;
+    });
+
+    //Update Todos from API
+    builder.addCase(updateTodo.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateTodo.fulfilled, (state, action) => {
+      const filteredTodos = state.todos.filter((item) => {
+        return item.id !== action.payload.data.id;
+      });
+      filteredTodos.push(action.payload.data);
+      state.todos = filteredTodos;
+      state.loading = false;
+    });
+    builder.addCase(updateTodo.rejected, (state) => {
       state.loading = true;
     });
   },

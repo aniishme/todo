@@ -2,7 +2,7 @@ import React from "react";
 import { TTodo } from "@/types";
 
 import { useAppDispatch } from "@/redux/store";
-import { deleteTodo } from "@/redux/features/todo/todoApi";
+import { deleteTodo, updateTodo } from "@/redux/features/todo/todoApi";
 
 import { BiEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
@@ -11,9 +11,10 @@ const Todo = ({ todo }: { todo: TTodo }) => {
   const dispatch = useAppDispatch();
   let checked = todo.completed;
 
-  const handleIsComplete = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleIsComplete = () => {
     checked = !checked;
-    const completedTodo = { ...todo, isCompleted: checked };
+    const completedTodo = { ...todo, completed: checked };
+    dispatch(updateTodo(completedTodo));
   };
 
   const handleDeleteTodo = () => {
@@ -31,7 +32,7 @@ const Todo = ({ todo }: { todo: TTodo }) => {
         />
         <h2
           className={`${
-            todo.completed && "text-red-500"
+            todo.completed && "line-through"
           } w-full text-xl break-all`}
         >
           {todo.title}

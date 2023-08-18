@@ -16,7 +16,6 @@ const InputBox = () => {
 
     const payload = {
       title: todo,
-      completed: false,
     };
     dispatch(addTodo(payload));
     setTodo("");
