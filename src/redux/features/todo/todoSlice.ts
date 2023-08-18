@@ -1,6 +1,6 @@
 import { getTodos, addTodo, deleteTodo } from "./todoApi";
 import { TTodo } from "@/types";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 interface IState {
   todos: TTodo[];

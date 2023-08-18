@@ -1,12 +1,21 @@
 "use client";
-import React from "react";
-import InputBox from "./InputBox";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useAppDispatch } from "@/redux/store";
+
 import Todo from "./Todo";
+import { getTodos } from "@/redux/features/todo/todoApi";
 
 const TodoContainer = () => {
+  const dispatch = useAppDispatch();
   const { todos } = useSelector((state: any) => state.todoSlice);
-  console.log("TODOS:::", todos);
+
+  useEffect(() => {
+    dispatch(getTodos());
+  }, [dispatch]);
+
+  console.log(todos);
+
   return (
     <div className="h-96 w-full flex flex-col gap-4">
       {todos.map((todo: any) => {
