@@ -35,9 +35,11 @@ const FilteredTodos = () => {
   });
   return (
     <div className="h-full w-full flex flex-col gap-4 ">
-      {filteredTodo.map((todo: any) => {
-        return <Todo todo={todo} key={todo.id} />;
-      })}
+      {filteredTodo.length
+        ? filteredTodo.map((todo: any) => {
+            return <Todo todo={todo} key={todo.id} />;
+          })
+        : "No todos to show"}
     </div>
   );
 };
