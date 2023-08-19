@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { TTodo } from "@/types";
 

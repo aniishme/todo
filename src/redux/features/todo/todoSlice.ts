@@ -5,18 +5,25 @@ import { createSlice } from "@reduxjs/toolkit";
 interface IState {
   todos: TTodo[];
   loading: boolean;
+  activeFilter: string;
 }
 
 const initialState: IState = {
   todos: [],
   loading: false,
+  activeFilter: "all",
 };
 
 // create a redux slice
 export const todoSlice = createSlice({
   name: "extraction",
   initialState,
-  reducers: {},
+  reducers: {
+    // set active filter
+    setActiveFilter: (state, action) => {
+      state.activeFilter = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     //Fetch Todos from API
     builder.addCase(getTodos.pending, (state) => {
@@ -75,4 +82,5 @@ export const todoSlice = createSlice({
   },
 });
 
+export const { setActiveFilter } = todoSlice.actions;
 export default todoSlice.reducer;
