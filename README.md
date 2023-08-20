@@ -23,8 +23,9 @@ Follow these steps to run the Todo App on your local machine:
 1. Clone this repository to your local machine.
 2. Open your terminal and navigate to the project directory.
 3. Run the command `npm install` to install all the required dependencies.
-4. Start the development server with the command `npm run dev`.
-5. Open your web browser and go to [http://localhost:3000](http://localhost:3000) to access and explore the app.
+4. Create `.env` file in root directory and copy contents from `.env.example` into `.env`.
+5. Start the development server with the command `npm run dev`.
+6. Open your web browser and go to [http://localhost:3000](http://localhost:3000) to access and explore the app.
 
 Feel free to reach out if you have any questions.
 
