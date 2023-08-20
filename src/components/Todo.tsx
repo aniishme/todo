@@ -1,15 +1,33 @@
 "use client";
-import React, { use, useRef, useState } from "react";
-import { TTodo } from "@/types";
+import React, { useRef, useState } from "react";
 
 import { useAppDispatch } from "@/redux/store";
 import { deleteTodo, updateTodo } from "@/redux/features/todo/todoApi";
 
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+
 import { BiEdit } from "react-icons/bi";
 import { BsArrowRightCircle } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
+import { RxDragHandleDots2 } from "react-icons/rx";
 
-const Todo = ({ todo }: { todo: TTodo }) => {
+import { TTodo } from "@/types";
+
+type TProps = {
+  id: number;
+  todo: TTodo;
+};
+
+const Todo: React.FC<TProps> = ({ id, todo }) => {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
   const dispatch = useAppDispatch();
   let checked = todo.completed;
 
@@ -37,7 +55,12 @@ const Todo = ({ todo }: { todo: TTodo }) => {
   };
 
   return (
-    <div className="flex justify-between items-center gap-2 p-4 w-full break-words bg-purple-500 rounded-md text-white font-medium">
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      className="touch-manipulation flex justify-between items-center gap-2 p-4 w-full break-words bg-purple-500 rounded-md text-white font-medium"
+    >
       <div className="flex gap-3 items-center break-words w-full">
         <input
           type="checkbox"
@@ -76,6 +99,10 @@ const Todo = ({ todo }: { todo: TTodo }) => {
 
         <button onClick={handleDeleteTodo} className="text-red-400">
           <MdDelete />
+        </button>
+
+        <button {...listeners}>
+          <RxDragHandleDots2 />
         </button>
       </div>
     </div>
