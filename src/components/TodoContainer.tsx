@@ -3,9 +3,9 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "@/redux/store";
 
-import Todo from "./Todo";
 import { getTodos } from "@/redux/features/todo/todoApi";
 import FilterTabs from "./FilterTabs";
+import DragAndDrop from "./dnd/DragAndDrop";
 
 const TodoContainer = () => {
   const dispatch = useAppDispatch();
@@ -41,9 +41,7 @@ const FilteredTodos = () => {
   return (
     <>
       {filteredTodo.length ? (
-        filteredTodo.map((todo: any) => {
-          return <Todo todo={todo} key={todo.id} />;
-        })
+        <DragAndDrop items={filteredTodo} />
       ) : (
         <div className="text-center">No todos to show...</div>
       )}

@@ -23,6 +23,9 @@ export const todoSlice = createSlice({
     setActiveFilter: (state, action) => {
       state.activeFilter = action.payload;
     },
+    sortDraggedTodos: (state, action) => {
+      state.todos = action.payload;
+    },
   },
   extraReducers: (builder) => {
     //Fetch Todos from API
@@ -82,5 +85,5 @@ export const todoSlice = createSlice({
   },
 });
 
-export const { setActiveFilter } = todoSlice.actions;
+export const { setActiveFilter, sortDraggedTodos } = todoSlice.actions;
 export default todoSlice.reducer;
