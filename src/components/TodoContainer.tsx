@@ -39,7 +39,7 @@ const FilteredTodos = () => {
   if (loading) return <div className="text-center">Loading...</div>;
 
   return (
-    <div className="h-full w-full flex flex-col gap-4 ">
+    <>
       {filteredTodo.length ? (
         filteredTodo.map((todo: any) => {
           return <Todo todo={todo} key={todo.id} />;
@@ -47,7 +47,7 @@ const FilteredTodos = () => {
       ) : (
         <div className="text-center">No todos to show...</div>
       )}
-    </div>
+    </>
   );
 };
 
