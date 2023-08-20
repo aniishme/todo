@@ -1,10 +1,9 @@
 import { NextResponse } from "next/server";
-import { NextApiRequest } from "next";
 
 import { prisma } from "@/lib/prisma";
 import { TTodo } from "@/types";
 
-export async function DELETE(request: NextApiRequest, context: any) {
+export async function DELETE(request: Request, context: any) {
   try {
     const id = parseInt(context.params.id);
     const todo: TTodo = await prisma.todo.delete({
